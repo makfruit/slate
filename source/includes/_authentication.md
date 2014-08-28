@@ -1,5 +1,5 @@
 # Authentication
-Ecwid API request require authentication. Ecwid supports oAuth2 protocol to provide external applications with an easy way to authenticate and access store data on behalf of the user. Ecwid user grants or denies access to certain data in their store for the particular application - the application gets its own secure access token upon authorization and uses that token as a key to make API calls to Ecwid.
+All Ecwid API requests require authentication. Ecwid supports oAuth2 protocol to provide external applications with an easy way to authenticate and access store data on behalf of the user. Ecwid user grants or denies access to certain data in their store for the particular application - the application gets its own secure access token upon authorization and uses that token as a key to make API calls to Ecwid.
 
 ##Retrieveing access token
 
@@ -17,9 +17,8 @@ Your application sends the user to Ecwid authorization dialog available on the E
 > Request example
 
 ```shell
-curl "https://my.ecwid.com/api/oauth/authorize?client_id=abcd0123&redirect_uri=https%3A%2F%2Fwww%2Eexample%2Ecom%2Fmyapp&response_type=code"
+curl "http://app.ecwid.com/api/oauth/authorize?client_id=abcd0123&redirect_uri=https%3A%2F%2Fwww%2Eexample%2Ecom%2Fmyapp&response_type=code"
 ```
-
 
 `GET https://my.ecwid.com/api/oauth/authorize`
 
@@ -28,7 +27,7 @@ Parameter | Required | Description
 client_id | required | application ID
 redirect_uri | required | URI in your app where users will be sent after authorization. It must match the domain/URL of the registered refirect_uri specified in the app settings. I.e. if the registered redirect_uri is `http://www.example.com`, the redirect_uri in request might be `http://www.example.com/oauth/callback.php` , but not `http://www.example2.com/`
 response_type | required | `code` (must always be `code`)
-scope | optional | Scope of access that your app requests from the user, separated by space. See details in [Scopes](#scopes) section below
+scope | optional | Scope of access that your app requests from the user, separated by space. See details in [Scopes](#access-scopes) section below
 
 
 
@@ -127,7 +126,7 @@ In case of applications that are installed on a device (such as a computer, a ce
 > Step #1. Request example
 
 ```shell
-curl "https://my.ecwid.com/api/oauth/authorize?client_id=abcd0123&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code"
+curl "http://app.ecwid.com/api/oauth/authorize?client_id=abcd0123&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code"
 ```
 
 On the [Step #1](#retrieveing-access-token) (app requests a temporarily authorization code), application needs to send the following value as redirect_uri:
