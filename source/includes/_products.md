@@ -1063,6 +1063,234 @@ errorMessage | string | Error message
 
 
 
+
+<!--
+---------------------------------------------------------------------------------------------------------
+    Upload product gallery image
+---------------------------------------------------------------------------------------------------------
+-->
+
+## Upload gallery image
+
+Add image to the product images gallery.
+
+> Request example
+
+```http
+POST /api/v3/4870020/products/1234657/gallery?fileName=Extra%20Image&token=123456789abcd HTTP/1.1
+Host: app.ecwid.com
+Content-Type: application/json
+Cache-Control: no-cache
+
+binary data
+```
+
+`POST https://app.ecwid.com/api/v3/{storeId}/products/{productId}/gallery?fileName={fileName}token={token}`
+
+Name | Type    | Description
+---- | ------- | -----------
+**storeId** |  number | Ecwid store ID
+**productId** | number | Product ID
+**token** |  string |  oAuth token
+fileName |  string |  Image title
+
+### Response
+
+> Response example
+
+```json
+{
+    "id": 240198557
+}
+```
+
+A JSON object of type 'UploadStatus' with the following fields:
+
+#### UploadStatus
+Field | Type |  Description
+--------- | ---------| -----------
+id | number | Internal image file ID
+
+### Errors
+
+> Error response example 
+
+```http
+HTTP/1.1 500 Server Error
+Content-Type application/json; charset=utf-8
+
+{
+    "errorMessage": "Internal server error"
+}
+```
+
+In case of error, Ecwid responds with an error HTTP status code and JSON-formatted body containing error description
+
+#### HTTP codes
+
+**HTTP Status** | Description
+--------- | -----------| -----------
+500 | Uploading of the image file failed or there was an internal server error while processing a file
+404 | Product is not found
+413 | The image file is too large
+400 | Request parameters are malformed
+402 | The functionality/method is not available on the merchant plan
+
+#### Error response body (optional)
+
+Field | Type |  Description
+--------- | ---------| -----------
+errorMessage | string | Error message
+
+
+<!--
+---------------------------------------------------------------------------------------------------------
+    Delete product image
+---------------------------------------------------------------------------------------------------------
+-->
+
+## Delete gallery image
+
+> Request example
+
+```http
+DELETE /api/v3/4870020/products/1234657/gallery/1234657345/?token=123456789abcd HTTP/1.1
+Host: app.ecwid.com
+Content-Type: application/json
+Cache-Control: no-cache
+```
+
+`DELETE https://app.ecwid.com/api/v3/{storeId}/products/{productId}/gllery/{fileId}/?token={token}`
+
+Name | Type    | Description
+---- | ------- | -----------
+**storeId** |  number | Ecwid store ID
+**productId** | number | Product ID
+**token** |  string |  oAuth token
+**fileId** | number | Internal image file ID
+
+### Response
+
+> Response example
+
+```json
+{
+    "deleteCount": 1,
+    "success": true
+}
+```
+
+A JSON object of type 'DeleteStatus' with the following fields:
+
+#### DeleteStatus
+Field | Type |  Description
+----- | ---- | --------------
+deleteCount | number | The number of deleted images (`1` or `0` depending on whether the request was successful)
+success | boolean | `true` if the image has been deleted, `false` otherwise
+
+### Errors
+
+> Error response example 
+
+```http
+HTTP/1.1 404 Not Found
+Content-Type application/json; charset=utf-8
+```
+
+In case of error, Ecwid responds with an error HTTP status code and JSON-formatted body containing error description
+
+#### HTTP codes
+
+**HTTP Status** | Description
+--------- | -----------| -----------
+500 | Deleting of the image file failed or there was an internal server error
+404 | Product is not found
+400 | Request parameters are malformed
+
+#### Error response body (optional)
+
+Field | Type |  Description
+--------- | ---------| -----------
+errorMessage | string | Error message
+
+
+
+
+
+
+<!--
+---------------------------------------------------------------------------------------------------------
+    Delete all product gallery images
+---------------------------------------------------------------------------------------------------------
+-->
+
+## Delete all gallery images
+
+> Request example
+
+```http
+DELETE /api/v3/4870020/products/39847403/gallery?token=123456789abcd HTTP/1.1
+Host: app.ecwid.com
+Content-Type: application/json;charset=utf-8
+Cache-Control: no-cache
+```
+
+*Remove all gallery images attached to the product*
+
+`DELETE https://app.ecwid.com/api/v3/{storeId}/products/{productId}/gallery?token={token}`
+
+Name | Type    | Description
+---- | ------- | -----------
+**storeId** |  number | Ecwid store ID
+**productId** | number | Product ID
+**token** |  string |  oAuth token
+
+### Response
+
+> Response example
+
+```json
+{
+    "deleteCount": 4,
+    "success": true
+}
+```
+
+A JSON object of type 'DeleteStatus' with the following fields:
+
+#### DeleteStatus
+
+Field | Type |  Description
+----- | ---- | --------------
+deleteCount | number | The number of deleted gallery images
+success | boolean | `true` if the deletion was successful, `false` otherwise
+
+### Errors
+
+> Error response example 
+
+```http
+HTTP/1.1 404 Not Found
+Content-Type application/json; charset=utf-8
+```
+
+In case of error, Ecwid responds with an error HTTP status code and JSON-formatted body containing error description
+
+#### HTTP codes
+
+**HTTP Status** | Description
+--------- | -----------| -----------
+500 | Deleting of the files failed or there was an internal server error
+404 | Product is not found
+400 | Request parameters are malformed
+
+#### Error response body (optional)
+
+Field | Type |  Description
+--------- | ---------| -----------
+errorMessage | string | Error message
+
+
 <!--
 ---------------------------------------------------------------------------------------------------------
     Upload product file
@@ -1288,3 +1516,4 @@ In case of error, Ecwid responds with an error HTTP status code and JSON-formatt
 Field | Type |  Description
 --------- | ---------| -----------
 errorMessage | string | Error message
+
