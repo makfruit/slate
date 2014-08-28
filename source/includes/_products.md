@@ -3,6 +3,167 @@
 
 <!--
 ---------------------------------------------------------------------------------------------------------
+    Product search
+---------------------------------------------------------------------------------------------------------
+-->
+
+## Search products
+
+Search/filter store products
+
+### Request
+
+> Request examples
+
+```http
+GET /api/v3/4870020/products?keyword=apple&token=WUpjXYyKEz13WZzfJZM5QVtVgc6NLXxD HTTP/1.1
+Host: app.ecwid.com
+Content-Type: application/json;charset=utf-8
+Cache-Control: no-cache
+```
+
+`GET https://app.ecwid.com/api/v3/{storeId}/products?keyword={keyword}&priceFrom={priceFrom}&priceTo={priceTo}&category={category}&withSubcategories={withSubcategories}&sortBy={sortBy}&offset={offset}&limit={limit}&attribute.{attrId}={attributeValue}&createdFrom={createdFrom}&createdTo={createdTo}&updatedFrom={updatedFrom}&updatedTo={updatedTo}&enabled={enabled}&inStock={inStock}&attributeQuery={attributeQuery}&token={token}`
+
+Name | Type    | Description
+---- | ------- | --------------
+**storeId** |  number | Ecwid store ID
+**token** |  string | oAuth token
+keyword |  string | Search term. Ecwid searches products over multiple fields: title, description, SKU, product options, category name, gallery image descriptions, values of attributes
+priceFrom |  number | Minimum product price
+priceTo | number | Maximum product price
+category | number | Category ID
+withSubcategories |  boolean | `true`/`false`: defines whether Ecwid should search in subcategories of the category you set in `category` field. Ignored if `category` field is not set . `fales` is the default value
+sortBy |  string | Sort order. Supported values: <ul><li>`RELEVANCE` *default*</li> <li>`ADDED_TIME_DESC`</li> <li>`ADDED_TIME_ASC`</li> <li>`NAME_ASC`</li> <li>`NAME_DESC`</li> <li>`PRICE_ASC`</li> <li>`PRICE_DESC`</li></ul>
+offset | number | Offset from the beginning of the returned items list (for paging)
+limit | number | Maximum number of returned items. Maximum allowed value: `100`. Default value: `10`
+createdFrom | string | Product creation date (lower bound) Format: YYYY-MM-DD
+createdTo | string | Product creation date (upper bound) Format: YYYY-MM-DD
+updatedFrom | string | Product last update date (lower bound) Format: YYYY-MM-DD
+updatedTo | string | Product last update date (upper bound) Format: YYYY-MM-DD
+enabled | boolean | `true` to get only enabled products, `false` to get only disabled products
+inStock | boolean | `true` to get only products in stock, `false` to get out of stock products
+attributeQuery | string | Filter by product attribute values. Format: JSON <br />`{"attributeId1":["value1","value2"],"attributeId2":["value3"]}`
+
+<aside class="notice">
+If no filters are set in the URL, API will return all products
+</aside>
+
+<aside class="notice">
+Parameters in bold are mandatory
+</aside>
+
+### Response
+
+> Response example (JSON)
+
+```json
+{
+    "allProducts": 2,
+    "items": [
+        {
+            "id": 37208338,
+            "sku": "00000",
+            "smallThumbnailUrl": "http://app.ecwid.com/default-store/00000-80-sq.jpg",
+            "thumbnailUrl": "http://app.ecwid.com/default-store/00000-230-sq.jpg",
+            "imageUrl": "http://app.ecwid.com/default-store/00000-sq.jpg",
+            "unlimited": true,
+            "inStock": true,
+            "name": "Apple",
+            "price": 1.99,
+            "weight": 0.32,
+            "url": "http://app.ecwid.com/store/4870020#!/~/product/id=37208338",
+            "created": "2014-06-06 18:57:19 +0400",
+            "updated": "2014-06-06 18:57:19 +0400",
+            "productClassId": 0,
+            "enabled": true,
+            "description": "<h5>Apple</h5>\n<p>The apple is the pomaceous fruit of the apple tree, species Malus domestica in the rose family Rosaceae. It is one of the most widely cultivated tree fruits. The tree is small and deciduous, reaching 3 to 12 metres (9.8 to 39 ft) tall, with a broad, often densely twiggy crown. The leaves are alternately arranged simple ovals 5 to 12 cm long and 3–6 centimetres (1.2–2.4 in) broad on a 2 to 5 centimetres (0.79 to 2.0 in) petiole with an acute tip, serrated margin and a slightly downy underside. Blossoms are produced in spring simultaneously with the budding of the leaves. The flowers are white with a pink tinge that gradually fades, five petaled, and 2.5 to 3.5 centimetres (0.98 to 1.4 in) in diameter. The fruit matures in autumn, and is typically 5 to 9 centimetres (2.0 to 3.5 in) diameter. The center of the fruit contains five carpels arranged in a five-point star, each carpel containing one to three seeds.</p>\n<p>The tree originated from Central Asia, where its wild ancestor is still found today. There are more than 7,500 known cultivars of apples resulting in a range of desired characteristics. Cultivars vary in their yield and the ultimate size of the tree, even when grown on the same rootstock.</p>\n<p>vAt least 55 million tonnes of apples were grown worldwide in 2005, with a value of about $10 billion. China produced about 35% of this total. The United States is the second leading producer, with more than 7.5% of the world production. Turkey, France, Italy, and Iran are also among the leading apple exporters.</p>\n<p> </p>\n<div style=\"padding: 24px 24px 24px 21px; display: block; background-color: #ececec;\">From <a style=\"color: #1e7ec8; text-decoration: underline;\" title=\"Wikipedia\" href=\"http://en.wikipedia.org\">Wikipedia</a>, the free encyclopedia</div>",
+            "descriptionTruncated": false
+        },
+        {
+            "id": 37208344,
+            "sku": "00003",
+            "smallThumbnailUrl": "http://app.ecwid.com/default-store/00003-80-sq.jpg",
+            "thumbnailUrl": "http://app.ecwid.com/default-store/00003-230-sq.jpg",
+            "imageUrl": "http://app.ecwid.com/default-store/00003-sq.jpg",
+            "unlimited": true,
+            "inStock": true,
+            "name": "Orange",
+            "price": 2.99,
+            "weight": 0.32,
+            "url": "http://app.ecwid.com/store/4870020#!/~/product/id=37208344",
+            "created": "2014-06-06 18:57:19 +0400",
+            "updated": "2014-06-06 18:57:19 +0400",
+            "productClassId": 0,
+            "enabled": true,
+            "description": "<h5>Orange</h5>\n<p>An orange—specifically, the sweet orange—is the citrus Citrus ×sinensis (syn. Citrus aurantium L. var. dulcis L., or Citrus aurantium Risso) and its fruit. The orange is a hybrid of ancient cultivated origin, possibly between pomelo (Citrus maxima) and tangerine (Citrus reticulata). It is a small flowering tree growing to about 10 m tall with evergreen leaves, which are arranged alternately, of ovate shape with crenulate margins and 4–10 cm long. The orange fruit is a hesperidium, a type of berry.</p>\n<p>Oranges originated in Southeast Asia. The fruit of Citrus sinensis is called sweet orange to distinguish it from Citrus aurantium, the bitter orange. The name is thought to ultimately derive from the Dravidian and Telugu word for the orange tree, with its final form developing after passing through numerous intermediate languages.</p>\n<p>In a number of languages, it is known as a \"Chinese apple\" (e.g. Dutch Sinaasappel, \"China's apple\", or \"Apfelsine\" in German).</p>\n<p> </p>\n<div style=\"padding: 24px 24px 24px 21px; display: block; background-color: #ececec;\">From <a style=\"color: #1e7ec8; text-decoration: underline;\" title=\"Wikipedia\" href=\"http://en.wikipedia.org\">Wikipedia</a>, the free encyclopedia</div>",
+            "descriptionTruncated": false
+        }
+    ]
+}
+```
+
+A JSON object of type 'SearchResult' with the following fields:
+
+#### SearchResult
+Field | Type | Description
+----- | ---- | -----------
+allProducts | number | The total number of found products (might be more than the number of returned items if the `limit` is less than the number of found products)
+items | Array<ProductEntry> | The items list
+
+#### ProductEntry
+Field | Type  | Description
+-------------- | -------------- | --------------
+id |  number |  Unique integer product identifier
+sku | string |  Product SKU. Items with options can have several SKUs specified in the product combinations.
+quantity |  number | Amount of product items in stock. *This field is omitted for the products with unlimited stock*
+inStock | boolean | `true` if the product or any of its combinations is in stock (quantity is more than zero) or has unlimited quantity. `false` otherwise.
+name |  string |  Product title
+price | number |  Base product price
+listPrice | number |  Product price displayed in the product list. May differ from the *price* value when the product has combinations and the default combination's price is different from the base product price
+compareToPrice |  number | Product's sale price displayed strike-out in the customer frontend
+weight |  number | Product weight in the units defined in store settings. *Omitted for intangible products*
+url | string |  URL of the product's details page in the store
+created | string | Date and time of the product creation. Example: `2014-07-30 10:32:37 +0400`
+updated |  string | Product last update date/time
+productClassId |  number | Id of the class (type) that this product belongs to. `0` value means the product is of the default 'General' class. See also: [Product types and attributes in Ecwid](http://help.ecwid.com/customer/portal/articles/1167365-product-types-and-attributes)
+enabled | boolean | `true` if product is enabled, `false` otherwise. Disabled products are not displayed in the store front.
+thumbnailUrl |  string | URL of the product thumbnail displayed on the product list pages. Thumbnails size is defined in the store settings. *The original uploaded product image is available in the `originalImageUrl` field.*
+imageUrl |  string  | URL of the product image resized to fit 500x500. *The original uploaded product image is available in the `originalImageUrl` field.*
+smallThumbnailUrl | string  | URL of the product thumbnail resized to fit 80x80. *The original uploaded product image is available in the `originalImageUrl` field.*
+description | string  | Product description *in HTML* TODO: limit
+descriptionTruncated | boolean | Identifies whether the returned description has been truncated
+
+
+### Errors
+
+> Error response example
+
+```http
+HTTP/1.1 400 Wrong parameter 'inStock' value: expected one of 'true', 'false', 'yes', 'no', 'on', 'off', '1', '0
+Content-Type application/json; charset=utf-8
+```
+
+In case of error, Ecwid responds with an error HTTP status code and, optionally, JSON-formatted body containing error description
+
+#### HTTP codes
+
+HTTP Status | Meaning
+------------|--------
+400 | Request parameters are malformed
+500 | Cannot get the product because of an error on the server
+
+#### Error response body (optional)
+
+Field | Type |  Description
+--------- | ---------| -----------
+errorMessage | string | Error message
+
+
+
+
+
+<!--
+---------------------------------------------------------------------------------------------------------
     Get product details
 ---------------------------------------------------------------------------------------------------------
 -->
@@ -218,7 +379,7 @@ Parameters in bold are mandatory
 A JSON object of type 'Product' with the following fields:
 
 #### Product
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 id |  number |  Unique integer product identifier
 sku | string |  Product SKU. Items with options can have several SKUs specified in the product combinations.
@@ -254,13 +415,13 @@ relatedProducts | [RelatedProducts*  | Related or "You may also like" products o
 combinations | Array\<*Combination*\> | List of the product combinations
 
 #### WholesalePrice
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 quantity |  number |  Number of product items on this wholesale tier
 price | number |  Product price on the tier
 
 #### ProductOption
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 type |  string | One of `SELECT`, `RADIO`, `CHECKBOX`, `TEXTFIELD`, `TEXTAREA`, `DATE`, `FILES`
 name |  string |  Product option name, e.g. `Color`
@@ -269,7 +430,7 @@ defaultChoice | number  | The number, starting from `0`, of the option's default
 required |  boolean | `true` if this option is required, `false` otherwise. Default is `false`
 
 #### GalleryImage
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 alt | string |  Image description, displayed in the image tag's *alt* attribute
 url | string |  Image URL
@@ -278,14 +439,14 @@ width | number |  Image width
 height |  number |  Image height
 
 #### AttributeValue
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 id |  number |  Unique attribute ID. See [Product Classes](#product-classes) for the information on attribute IDs
 name |  string |  Attribute displayed name
 value | string  | Attribute value
 
 #### ProductFile
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 id |  number |  Internal ID of the file 
 name |  string |  File name
@@ -293,20 +454,20 @@ description | string |  File description defined by the store administrator
 size |  number |  File size, bytes (64-bit integer)
 
 #### RelatedProducts
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 productIds | Array\<number\>  | IDs of the related products
 relatedCategory | *RelatedCategory*  | Describes the "N random related products from a category" option
 
 #### RelatedCategory
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 enabled | boolean | `true` if the "N random related products from a category" option is enabled. `false` otherwise
 categoryId |  number |  Id of the related category. Zero value means "any category", that is, random products from the whole store.
 productCount |  number |  Number of random products from the given category to be shown as related
 
 #### Combination
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 id |  number |  Combination ID
 combinationNumber | number |  Combination # number, which is displayed in the combinations table in Control panel
@@ -325,13 +486,13 @@ warningLimit | number | The minimum 'warning' amount of the product items in sto
 
 
 #### OptionValue
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 name |  string |  Option name
 value | string |  Option value
 
 #### ProductOptionChoice
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 text |  string | Option selection text, e.g. 'Green'.
 priceModifier | number | Percent or absolute value of the option's price markup. Positive, negative and zero values are allowed. Default is `0`
@@ -355,7 +516,7 @@ HTTP Status | Meaning
 
 #### Error response body (optional)
 
-**Field** | **Type** |  **Description**
+Field | Type |  Description
 --------- | ---------| -----------
 errorMessage | string | Error message
 
@@ -436,14 +597,14 @@ relatedProducts | [RelatedProducts*  | Related or "You may also like" products o
 
 
 #### WholesalePrice
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 **quantity** |  number |  Number of product items on this wholesale tier
 **price** | number |  Product price on the tier
 
 
 #### ProductOption
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 type |  string | One of `SELECT`, `RADIO`, `CHECKBOX`, `TEXTFIELD`, `TEXTAREA`, `DATE`, `FILES`
 **name** |  string |  Product option name, e.g. `Color`
@@ -453,32 +614,32 @@ required |  boolean | `true` if this option is required, `false` otherwise. Defa
 
 
 #### AttributeValue
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 **id** |  number |  Unique attribute ID. See [Product Classes](#product-classes) for the information on attribute IDs
 value | string  | Attribute value
 
 #### RelatedProducts
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 **productIds** | Array\<number\>  | IDs of the related products
 relatedCategory | *RelatedCategory*  | Describes the "N random related products from a category" option
 
 #### RelatedCategory
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 enabled | boolean | `true` if the "N random related products from a category" option is enabled. `false` otherwise
 **categoryId** |  number |  Id of the related category. Zero value means "any category", that is, random products from the whole store.
 productCount |  number |  Number of random products from the given category to be shown as related
 
 #### OptionValue
-**Field** | **Type** |  **Description**
+Field | Type |  Description
 -------------- | -------------- | --------------
 **name** |  string |  Option name, as in Product.options[i].name
 value | string |  Option value one of Product.options[i].choices[j].text
 
 #### ProductOptionChoice
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 **text** |  string | Option selection text, e.g. 'Green'.
 priceModifier | number | Percent or absolute value of the option's price markup. Positive, negative and zero values are allowed. Default is `0`
@@ -505,7 +666,7 @@ Parameters in bold are mandatory
 A JSON object of type 'CreateStatus' with the following fields:
 
 #### CreateStatus
-**Field** | **Type** |  **Description**
+Field | Type |  Description
 -------------- | -------------- | --------------
 id | number | ID of the created product
 message | string | Status message 
@@ -523,7 +684,7 @@ In case of error, Ecwid responds with an error HTTP status code and JSON-formatt
 
 #### HTTP codes
 
-**HTTP Status** | **Response JSON** | **Description**
+**HTTP Status** | **Response JSON** | Description
 -------------- | -------------- | --------------
 400 | Request parameters are malformed
 409 | The product with such SKU already exists
@@ -533,7 +694,7 @@ In case of error, Ecwid responds with an error HTTP status code and JSON-formatt
 
 #### Error response body (optional)
 
-**Field** | **Type** |  **Description**
+Field | Type |  Description
 --------- | ---------| -----------
 errorMessage | string | Error message
 
@@ -604,14 +765,14 @@ All fields are optional
 
 
 #### WholesalePrice
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 **quantity** |  number |  Number of product items on this wholesale tier
 **price** | number |  Product price on the tier
 
 
 #### ProductOption
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 type |  string | One of `SELECT`, `RADIO`, `CHECKBOX`, `TEXTFIELD`, `TEXTAREA`, `DATE`, `FILES`
 **name** |  string |  Product option name, e.g. `Color`
@@ -621,20 +782,20 @@ required |  boolean | `true` if this option is required, `false` otherwise. Defa
 
 
 #### AttributeValue
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 **id** |  number |  Unique attribute ID. See [Product Classes](#product-classes) for the information on attribute IDs
 value | string  | Attribute value
 
 #### RelatedProducts
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 **productIds** | Array\<number\>  | IDs of the related products
 relatedCategory | *RelatedCategory* | Describes the "N random related products from a category" option
 
 
 #### RelatedCategory
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 enabled | boolean | `true` if the "N random related products from a category" option is enabled. `false` otherwise
 **categoryId** |  number |  Id of the related category. Zero value means "any category", that is, random products from the whole store.
@@ -642,13 +803,13 @@ productCount |  number |  Number of random products from the given category to b
 
 
 #### OptionValue
-**Field** | **Type** |  **Description**
+Field | Type |  Description
 -------------- | -------------- | --------------
 **name** |  string |  Option name, as in Product.options[i].name
 value | string |  Option value one of Product.options[i].choices[j].text
 
 #### ProductOptionChoice
-**Field** | **Type**  | **Description**
+Field | Type  | Description
 -------------- | -------------- | --------------
 **text** |  string | Option selection text, e.g. 'Green'.
 priceModifier | number | Percent or absolute value of the option's price markup. Positive, negative and zero values are allowed. Default is `0`
@@ -698,7 +859,7 @@ HTTP Status | Description
 
 #### Error response body (optional)
 
-**Field** | **Type** |  **Description**
+Field | Type |  Description
 --------- | ---------| -----------
 errorMessage | string | Error message
 
@@ -795,7 +956,7 @@ Name | Type    | Description
 A JSON object of type 'UploadStatus' with the following fields:
 
 #### UploadStatus
-**Field** | **Type** |  **Description**
+Field | Type |  Description
 --------- | ---------| -----------
 id |    number | Internal image ID
 
@@ -816,7 +977,7 @@ In case of error, Ecwid responds with an error HTTP status code and JSON-formatt
 
 #### HTTP codes
 
-**HTTP Status** | **Description**
+**HTTP Status** | Description
 --------- | -----------| -----------
 500 | Uploading of the image file failed or there was an internal server error while processing a file
 404 | Product is not found
@@ -826,7 +987,7 @@ In case of error, Ecwid responds with an error HTTP status code and JSON-formatt
 
 #### Error response body (optional)
 
-**Field** | **Type** |  **Description**
+Field | Type |  Description
 --------- | ---------| -----------
 errorMessage | string | Error message
 
@@ -888,14 +1049,14 @@ In case of error, Ecwid responds with an error HTTP status code and JSON-formatt
 
 #### HTTP codes
 
-**HTTP Status** | **Description**
+**HTTP Status** | Description
 --------- | -----------| -----------
 500 | Deleting of the image file failed or there was an internal server error
 404 | Product is not found
 
 #### Error response body (optional)
 
-**Field** | **Type** |  **Description**
+Field | Type |  Description
 --------- | ---------| -----------
 errorMessage | string | Error message
 
@@ -968,7 +1129,7 @@ In case of error, Ecwid responds with an error HTTP status code and, optionally,
 
 #### HTTP codes
 
-**HTTP Status** | **Description**
+**HTTP Status** | Description
 --------- | -----------| -----------
 500 | Uploading of the file failed or there was an internal server error while processing a file
 404 | Product is not found
@@ -978,7 +1139,7 @@ In case of error, Ecwid responds with an error HTTP status code and, optionally,
 
 #### Error response body (optional)
 
-**Field** | **Type** |  **Description**
+Field | Type |  Description
 --------- | ---------| -----------
 errorMessage | string | Error message
 
@@ -1044,14 +1205,14 @@ In case of error, Ecwid responds with an error HTTP status code and JSON-formatt
 
 #### HTTP codes
 
-**HTTP Status** | **Description**
+**HTTP Status** | Description
 --------- | -----------| -----------
 500 | Deleting of the file failed or there was an internal server error
 404 | Product is not found
 
 #### Error response body (optional)
 
-**Field** | **Type** |  **Description**
+Field | Type |  Description
 --------- | ---------| -----------
 errorMessage | string | Error message
 
@@ -1117,13 +1278,13 @@ In case of error, Ecwid responds with an error HTTP status code and JSON-formatt
 
 #### HTTP codes
 
-**HTTP Status** | **Description**
+**HTTP Status** | Description
 --------- | -----------| -----------
 500 | Deleting of the files failed or there was an internal server error
 404 | Product is not found
 
 #### Error response body (optional)
 
-**Field** | **Type** |  **Description**
+Field | Type |  Description
 --------- | ---------| -----------
 errorMessage | string | Error message
