@@ -25,7 +25,7 @@ curl "http://app.ecwid.com/api/oauth/authorize?client_id=abcd0123&redirect_uri=h
 Parameter | Required | Description
 --------- | -------- | -----------
 client_id | required | application ID
-redirect_uri | required | URI in your app where users will be sent after authorization. It must match the domain/URL of the registered refirect_uri specified in the app settings. I.e. if the registered redirect_uri is `http://www.example.com`, the redirect_uri in request might be `http://www.example.com/oauth/callback.php` , but not `http://www.example2.com/`
+redirect_uri | required | URI in your app where users will be sent after authorization. It must match the domain/URL of the registered return_url specified in the app settings. I.e. if the registered return_url is `http://www.example.com`, the redirect_uri in request might be `http://www.example.com/oauth/callback.php` , but not `http://www.example2.com/`
 response_type | required | `code` (must always be `code`)
 scope | optional | Scope of access that your app requests from the user, separated by space. See details in [Scopes](#access-scopes) section below
 
@@ -115,6 +115,14 @@ Scopes are permissions that identifies the scope of access your application requ
 * read_orders
 * update_orders
 * create_orders
+* read_customers
+* update_customers
+* create_customers
+* create_discount_coupons
+* read_discount_coupons
+* update_discount_coupons
+* customize_storefront *(in development)*
+* add_to_cp *(in development)*
 
 
 ##Authentication of installed applications

@@ -16,7 +16,7 @@ Search/filter store products
 > Request examples
 
 ```http
-GET /api/v3/4870020/products?keyword=apple&token=WUpjXYyKEz13WZzfJZM5QVtVgc6NLXxD HTTP/1.1
+GET /api/v3/4870020/products?keyword=apple&token=1234567890qwqeertt HTTP/1.1
 Host: app.ecwid.com
 Content-Type: application/json;charset=utf-8
 Cache-Control: no-cache
@@ -107,7 +107,9 @@ A JSON object of type 'SearchResult' with the following fields:
 #### SearchResult
 Field | Type | Description
 ----- | ---- | -----------
-allProducts | number | The total number of found products (might be more than the number of returned items if the `limit` is less than the number of found products)
+total | number | The total number of found items (might be more than the number of returned items)
+offset | number | Offset from the beginning of the returned items list (for paging)
+limit | number | Maximum number of returned items. Maximum allowed value: `100`. Default value: `10`
 items | Array<ProductEntry> | The items list
 
 #### ProductEntry

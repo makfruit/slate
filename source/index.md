@@ -12,4 +12,6 @@ includes:
   - authentication
   - rest_api_reference
   - products
+  - customers
+  - coupons
 ---
