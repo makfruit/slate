@@ -915,6 +915,32 @@ deleteCount | number | The number of deleted products (`1` or `0` depending on w
 success | boolean | `true` if the product has been deleted, `false` otherwise
 
 
+### Errors
+
+> Error response example
+
+```http
+HTTP/1.1 404 Not Found
+Content-Type application/json; charset=utf-8
+```
+
+In case of error, Ecwid responds with an error HTTP status code and, optionally, JSON-formatted body containing error description.
+
+#### HTTP codes
+
+**HTTP Status** | **Response JSON** | Description
+-------------- | -------------- | --------------
+400 | Request parameters are malformed
+404 | The product with given ID is not found
+500 | The delete request failed because of an error on the server
+
+#### Error response body (optional)
+
+Field | Type |  Description
+--------- | ---------| -----------
+errorMessage | string | Error message
+
+
 
 <!--
 ---------------------------------------------------------------------------------------------------------

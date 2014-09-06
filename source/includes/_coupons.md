@@ -1,4 +1,4 @@
-# Coupons
+# Discount Coupons
 
 
 <!--
@@ -48,52 +48,38 @@ Parameters in bold are mandatory
     "limit": 10,
     "offset": 0,
     "items": [
--{
-name: "Coupon # 2"
-code: "J3N4JM3SIPCJ"
-discountType: "SHIPPING"
-status: "ACTIVE"
-discount: 0
-launchDate: "2014-06-06 00:00:00 +0400"
-expirationDate: "2014-09-27 23:59:59 +0400"
-totalLimit: 50.4
-usesLimit: "UNLIMITED"
-repeatCustomerOnly: false
-creationDate: "2014-06-06 18:57:19 +0400"
-orderCount: 0
-}
--{
-name: "Coupon # 1"
-code: "MOXQ3YCWXRXA"
-discountType: "ABS"
-status: "ACTIVE"
-discount: 1
-launchDate: "2014-06-06 08:00:00 +0400"
-usesLimit: "UNLIMITED"
-repeatCustomerOnly: false
-creationDate: "2014-06-06 18:57:19 +0400"
-orderCount: 0
--catalogLimit: {
--products: [
-37208342
-37208338
-]
-categories: [ ]
-}
-}
--{
-name: "Coupon # 3"
-code: "O3Q4AP5FKXJ1"
-discountType: "PERCENT"
-status: "PAUSED"
-discount: 5
-launchDate: "2014-06-06 08:00:00 +0400"
-usesLimit: "UNLIMITED"
-repeatCustomerOnly: false
-creationDate: "2014-06-06 18:57:19 +0400"
-orderCount: 0
-}
-]
+        {
+            "name": "Coupon # 1",
+            "code": "MOXQ3YCWXRXA",
+            "discountType": "ABS",
+            "status": "ACTIVE",
+            "discount": 1,
+            "launchDate": "2014-06-06 08:00:00 +0400",
+            "usesLimit": "UNLIMITED",
+            "repeatCustomerOnly": false,
+            "creationDate": "2014-06-06 18:57:19 +0400",
+            "orderCount": 0,
+            "catalogLimit": {
+                "products": [
+                    37208342,
+                    37208338
+                ],
+                "categories": []
+            }
+        },
+        {
+            "name": "Coupon # 3",
+            "code": "O3Q4AP5FKXJ1",
+            "discountType": "PERCENT",
+            "status": "PAUSED",
+            "discount": 5,
+            "launchDate": "2014-06-06 08:00:00 +0400",
+            "usesLimit": "UNLIMITED",
+            "repeatCustomerOnly": false,
+            "creationDate": "2014-06-06 18:57:19 +0400",
+            "orderCount": 0
+        }
+    ]
 }
 ```
 
@@ -119,10 +105,10 @@ discount | number | Discount amount
 launchDate | string | The date of coupon launch
 expirationDate | string | Coupon expliration date, e.g. `2014-06-06 08:00:00 +0400`
 totalLimit | number *nullable* | The minimum order subtotal the coupon applies to
-usesLimit | string | Coupon usage number limitations: `UNLIMITED`, `ONCEPERCUSTOMER`, `SINGLE`
+usesLimit | string | Number of uses limitation: `UNLIMITED`, `ONCEPERCUSTOMER`, `SINGLE`
 repeatCustomerOnly | boolean | Coupon usage limitation flag identifying whether the coupon works for all customers or only repeat customers
 creationDate |  string | Coupon creation date
-orderCount | number | Coupon usage number
+orderCount | number | Number of uses
 catalogLimit |  \<*DiscountCouponCatalogLimit*\> | The products and categories the coupon can be applied to
 
 #### DiscountCouponCatalogLimit
@@ -170,18 +156,18 @@ errorMessage | string | Error message
 > Request example
 
 ```http
-GET /api/v3/4870020/discount_coupons/123123?token=123456789abcd HTTP/1.1
+GET /api/v3/4870020/discount_coupons/MOXQ3YCWXRXA?token=123456789abcd HTTP/1.1
 Host: app.ecwid.com
 Content-Type: application/json;charset=utf-8
 Cache-Control: no-cache
 ```
 
-`GET https://app.ecwid.com/api/v3/{storeId}/discount_coupons/{couponId}?token={token}`
+`GET https://app.ecwid.com/api/v3/{storeId}/discount_coupons/{couponCode}?token={token}`
 
 Name | Type    | Description
 ---- | ------- | --------------
 **storeId** |  number | Ecwid store ID
-**couponId** | number | Coupon ID
+**couponCode** | number | Coupon ID
 **token** |  string |  oAuth token
 
 ### Response
@@ -190,43 +176,23 @@ Name | Type    | Description
 
 ```json
 {
-    "id": 15319410,
-    "email": "johnsmith@example.com",
-    "registered": "2014-09-01 23:25:27 +0400",
-    "billingPerson": {
-        "name": "John Smith",
-        "companyName": "Unreal Company",
-        "street": "W 3d st",
-        "city": "New York",
-        "countryCode": "US",
-        "postalCode": "10001",
-        "stateOrProvinceCode": "NY",
-        "phone": "+1234567890"
-    },
-    "shippingAddresses": [
-        {
-            "id": 8315122,
-            "name": "John Smith",
-            "companyName": "",
-            "street": "W 3d st",
-            "city": "New York",
-            "countryCode": "US",
-            "postalCode": "10001",
-            "stateOrProvinceCode": "NY",
-            "phone": "123567890"
-        },
-        {
-            "id": 8315123,
-            "name": "Jane Smith",
-            "companyName": "",
-            "street": "1733 W Madison St",
-            "city": "Chicago",
-            "countryCode": "US",
-            "postalCode": "60612",
-            "stateOrProvinceCode": "IL",
-            "phone": ""
-        }
-    ]
+    "name": "Coupon # 1",
+    "code": "MOXQ3YCWXRXA",
+    "discountType": "ABS",
+    "status": "ACTIVE",
+    "discount": 1,
+    "launchDate": "2014-06-06 08:00:00 +0400",
+    "usesLimit": "UNLIMITED",
+    "repeatCustomerOnly": false,
+    "creationDate": "2014-06-06 18:57:19 +0400",
+    "orderCount": 0,
+    "catalogLimit": {
+        "products": [
+            37208342,
+            37208338
+        ],
+        "categories": []
+    }
 }
 ```
 
@@ -235,37 +201,26 @@ A JSON object of type 'Coupon' with the following fields:
 
 #### Coupon
 Field | Type  | Description
--------------- | -------------- | --------------
-id |  number |  Unique internal coupon ID
-email | string |  Coupon email
-registered | string | Registration date, e.g `2014-06-06 18:57:19 +0400`
-billingPerson | <Person> | Coupon's billing name/address
-shippingAddresses | Array<ShippingAddress> | Coupon address book items
+----- | ----- | -----------
+name |  string | Coupon title
+code |  string | Unique coupon code
+discountType | string | Discount type: `ABS`, `PERCENT` or `SHIPPING`
+status | string | Discount coupon state: `ACTIVE`, `PAUSED`, `EXPIRED` or `USEDUP`
+discount | number | Discount amount
+launchDate | string | The date of coupon launch
+expirationDate | string | Coupon expliration date, e.g. `2014-06-06 08:00:00 +0400`
+totalLimit | number *nullable* | The minimum order subtotal the coupon applies to
+usesLimit | string | Number of uses limitation: `UNLIMITED`, `ONCEPERCUSTOMER`, `SINGLE`
+repeatCustomerOnly | boolean | Coupon usage limitation flag identifying whether the coupon works for all customers or only repeat customers
+creationDate |  string | Coupon creation date
+orderCount | number | Number of uses
+catalogLimit |  \<*DiscountCouponCatalogLimit*\> | The products and categories the coupon can be applied to
 
-#### Person
-Field | Type  | Description
--------------- | -------------- | --------------
-name | string | Coupon full name
-companyName | string | Coupon company name
-street | string | Street
-city | string | City
-countryCode | string | Country (2-digits code)
-postalCode | string | Postal code (zip code)
-stateOrProvinceCode | string | State/province code
-phone | string | Phone number
-
-#### ShippingAddress
-Field | Type  | Description
-------| ----- | -----------
-id | number | Internal address ID
-name | string | Coupon full name
-companyName | string | Coupon company name
-street | string | Street
-city | string | City
-countryCode | string | Country (2-digits code)
-postalCode | string | Postal code (zip code)
-stateOrProvinceCode | string | State/province code
-phone | string | Phone number
+#### DiscountCouponCatalogLimit
+Field | Type | Description
+----- | ---- | -----------
+products | Array\<number\> | The list of product IDs the coupon can be applied to
+categories | Array\<number\> | The list of category IDs the coupon can be applied to
 
 ### Errors
 
@@ -283,18 +238,12 @@ In case of error, Ecwid responds with an error HTTP status code and, optionally,
 HTTP Status | Meaning
 ------------|--------
 404 | Coupon is not found
-500 | Cannot retrieve the coupon info because of an error on the server
-
-#### Error response body (optional)
-
-Field | Type |  Description
---------- | ---------| -----------
-errorMessage | string | Error message
+400 | Malformed request parameters
 
 
 <!--
 ---------------------------------------------------------------------------------------------------------
-    Create coupon
+    Create discount coupon
 ---------------------------------------------------------------------------------------------------------
 -->
 
@@ -311,42 +260,32 @@ Content-Type: application/json
 Cache-Control: no-cache
 
 {
-    "email": "example@example.com",
-    "password": "ecwidiscool",
-    "billingPerson": {
-        "name": "John Smith",
-        "companyName": "Imaginary Company",
-        "street": "Hedgehog Street, 1",
-        "city": "Bucket",
-        "countryCode": "US",
-        "postalCode": "90002",
-        "stateOrProvinceCode": "CA",
-        "phone": "11111111111"
-    },
-    "shippingAddresses": [
-        {
-            "name": "John Smith",
-            "companyName": "Imaginary Company",
-            "street": "W 3d st",
-            "city": "New York",
-            "countryCode": "US",
-            "postalCode": "10001",
-            "stateOrProvinceCode": "NY",
-            "phone": "11111111111"
-        }
-      ]
+    "name": "Coupon # 1",
+    "code": "MOXQ3YCWXRXA",
+    "discountType": "ABS",
+    "status": "ACTIVE",
+    "discount": 1,
+    "launchDate": "2014-06-06 08:00:00 +0400",
+    "usesLimit": "UNLIMITED",
+    "repeatCustomerOnly": false,
+    "creationDate": "2014-06-06 18:57:19 +0400",
+    "orderCount": 0,
+    "catalogLimit": {
+        "products": [
+            37208342,
+            37208338
+        ],
+        "categories": []
+    }
 }
 ```
 
-
 `POST https://app.ecwid.com/api/v3/{storeId}/discount_coupons?token={token}`
-
 
 Name | Type    | Description
 ---- | ------- | --------------
 **storeId** |  number | Ecwid store ID
 **token** |  string |  oAuth token
-
 
 ### Request body
 
@@ -354,36 +293,26 @@ A JSON object of type 'Coupon' with the following fields:
 
 #### Coupon
 Field | Type  | Description
--------------- | -------------- | --------------
-**email** | string |  Coupon email
-**password** | string |  Coupon email
-billingPerson | <Person> | Coupon's billing name/address
-shippingAddresses | Array<ShippingAddress> | Coupon address book items
+----- | ----- | -----------
+**name** |  string | Coupon title
+**code** |  string | Unique coupon code
+discountType | string | Discount type: `ABS`, `PERCENT` or `SHIPPING` . Default is `ABS`
+status | string | Discount coupon state: `ACTIVE`, `PAUSED`, `EXPIRED` or `USEDUP` . Default is `ACTIVE`
+discount | number | Discount amount . `0` is default
+launchDate | string | The date of coupon launch
+expirationDate | string | Coupon expliration date, e.g. `2014-06-06 08:00:00 +0400`
+totalLimit | number *nullable* | The minimum order subtotal the coupon applies to
+usesLimit | string | Number of uses limitation: `UNLIMITED`, `ONCEPERCUSTOMER`, `SINGLE` . `UNLIMITED` is default
+repeatCustomerOnly | boolean | Coupon usage limitation flag identifying whether the coupon works for all customers or only repeat customers. `false` is default
+creationDate |  string | Coupon creation date
+orderCount | number | Number of uses
+catalogLimit |  \<*DiscountCouponCatalogLimit*\> | The products and categories the coupon can be applied to
 
-#### Person
-Field | Type  | Description
--------------- | -------------- | --------------
-name | string | Coupon full name
-companyName | string | Coupon company name
-street | string | Street
-city | string | City
-countryCode | string | Country (2-digits code)
-postalCode | string | Postal code (zip code)
-stateOrProvinceCode | string | State/province code
-phone | string | Phone number
-
-#### ShippingAddress
-Field | Type  | Description
-------| ----- | -----------
-id | number | Internal address ID
-name | string | Coupon full name
-companyName | string | Coupon company name
-street | string | Street
-city | string | City
-countryCode | string | Country (2-digits code)
-postalCode | string | Postal code (zip code)
-stateOrProvinceCode | string | State/province code
-phone | string | Phone number
+#### DiscountCouponCatalogLimit
+Field | Type | Description
+----- | ---- | -----------
+products | Array\<number\> | The list of product IDs the coupon can be applied to
+categories | Array\<number\> | The list of category IDs the coupon can be applied to
 
 <aside class="notice">
 Parameters in bold are mandatory
@@ -397,10 +326,12 @@ Parameters in bold are mandatory
 
 ```json
 {
-    "id": 15319442,
+    "id": 9698215,
+    "message": "Successfully created",
     "success": true
 }
 ```
+
 
 A JSON object of type 'CreateStatus' with the following fields:
 
@@ -409,6 +340,7 @@ Field | Type |  Description
 -------------- | -------------- | --------------
 id | number | ID of the created coupon
 success | boolean | `true` if the coupon has been created, `false` otherwise
+message | string | Status message
 
 
 ### Errors
@@ -420,14 +352,14 @@ HTTP/1.1 409 Conflict
 Content-Type application/json; charset=utf-8
 ```
 
-In case of error, Ecwid responds with an error HTTP status code and JSON-formatted body containing error description.
+In case of error, Ecwid responds with an error HTTP status code and, optionally, a JSON-formatted body containing error description.
 
 #### HTTP codes
 
 **HTTP Status** | **Response JSON** | Description
 -------------- | -------------- | --------------
 400 | Request parameters are malformed
-409 | The coupon with the given email already exists
+409 | The coupon with the given code already exists
 500 | The creation request failed because of an error on the server
 
 #### Error response body (optional)
@@ -439,7 +371,7 @@ errorMessage | string | Error message
 
 <!--
 ---------------------------------------------------------------------------------------------------------
-    Edit coupon
+    Edit discount coupon
 ---------------------------------------------------------------------------------------------------------
 -->
 
@@ -450,49 +382,39 @@ errorMessage | string | Error message
 > Request body
 
 ```http
-PUT /api/v3/4870020/discount_coupons?10293737&token=123456789abcd HTTP/1.1
+PUT /api/v3/4870020/discount_coupons/12MOXQ3YCWXRXA?token=123456789abcd HTTP/1.1
 Host: app.ecwid.com
 Content-Type: application/json
 Cache-Control: no-cache
 
 {
-    "email": "new-email@example.com",
-    "password":"newpassword",
-    "billingPerson": {
-        "name": "New Name",
-        "companyName": "Ecwid",
-        "street": "Updated street",
-        "city": "Bucket",
-        "countryCode": "US",
-        "postalCode": "90002",
-        "stateOrProvinceCode": "CA",
-        "phone": "11111111111"
-    },
-    "shippingAddresses": [
-        {
-            "name": "Eugene K",
-            "companyName": "Hedgehog and Bucket",
-            "street": "Hedgehog Street, 3",
-            "city": "Bucket",
-            "countryCode": "US",
-            "postalCode": "90002",
-            "stateOrProvinceCode": "CA",
-            "phone": "11111111111"
-        }
-      ]
+    "name": "Coupon # 1",
+    "code": "MOXQ3YCWXRXA",
+    "discountType": "ABS",
+    "status": "ACTIVE",
+    "discount": 1,
+    "launchDate": "2014-06-06 08:00:00 +0400",
+    "usesLimit": "UNLIMITED",
+    "repeatCustomerOnly": false,
+    "creationDate": "2014-06-06 18:57:19 +0400",
+    "orderCount": 0,
+    "catalogLimit": {
+        "products": [
+            37208342,
+            37208338
+        ],
+        "categories": []
+    }
 }
 ```
 
-
-`PUT https://app.ecwid.com/api/v3/{storeId}/discount_coupons/{couponId}?token={token}`
-
+`PUT https://app.ecwid.com/api/v3/{storeId}/discount_coupons/{couponCode}?token={token}`
 
 Name | Type    | Description
 ---- | ------- | --------------
 **storeId** |  number | Ecwid store ID
-**token** |  string | oAuth token
-**couponId** | number | Internal coupon ID
-
+**token** |  string |  oAuth token
+**code** | string | Unique coupon code
 
 ### Request body
 
@@ -500,36 +422,26 @@ A JSON object of type 'Coupon' with the following fields:
 
 #### Coupon
 Field | Type  | Description
--------------- | -------------- | --------------
-email | string |  Coupon email
-password | string |  Coupon email
-billingPerson | <Person> | Coupon's billing name/address
-shippingAddresses | Array<ShippingAddress> | Coupon address book items
+----- | ----- | -----------
+name |  string | Coupon title
+code |  string | Unique coupon code
+discountType | string | Discount type: `ABS`, `PERCENT` or `SHIPPING` . 
+status | string | Discount coupon state: `ACTIVE`, `PAUSED`, `EXPIRED` or `USEDUP` .
+discount | number | Discount amount .
+launchDate | string | The date of coupon launch
+expirationDate | string | Coupon expliration date, e.g. `2014-06-06 08:00:00 +0400`
+totalLimit | number *nullable* | The minimum order subtotal the coupon applies to
+usesLimit | string | Number of uses limitation: `UNLIMITED`, `ONCEPERCUSTOMER`, `SINGLE` . 
+repeatCustomerOnly | boolean | Coupon usage limitation flag identifying whether the coupon works for all customers or only repeat customers.
+creationDate |  string | Coupon creation date
+orderCount | number | Number of uses
+catalogLimit |  \<*DiscountCouponCatalogLimit*\> | The products and categories the coupon can be applied to
 
-#### Person
-Field | Type  | Description
--------------- | -------------- | --------------
-name | string | Coupon full name
-companyName | string | Coupon company name
-street | string | Street
-city | string | City
-countryCode | string | Country (2-digits code)
-postalCode | string | Postal code (zip code)
-stateOrProvinceCode | string | State/province code
-phone | string | Phone number
-
-#### ShippingAddress
-Field | Type  | Description
-------| ----- | -----------
-id | number | Internal address ID
-name | string | Coupon full name
-companyName | string | Coupon company name
-street | string | Street
-city | string | City
-countryCode | string | Country (2-digits code)
-postalCode | string | Postal code (zip code)
-stateOrProvinceCode | string | State/province code
-phone | string | Phone number
+#### DiscountCouponCatalogLimit
+Field | Type | Description
+----- | ---- | -----------
+products | Array\<number\> | The list of product IDs the coupon can be applied to
+categories | Array\<number\> | The list of category IDs the coupon can be applied to
 
 <aside class="notice">
 All fields are optional
@@ -543,17 +455,20 @@ All fields are optional
 
 ```json
 {
+    "message": "Coupon was successfully updated",
     "updateCount": 1,
     "success": true
 }
 ```
 
+
 A JSON object of type 'UpdateStatus' with the following fields:
 
-#### UpdateStatus
+#### CreateStatus
 Field | Type |  Description
 -------------- | -------------- | --------------
-updateCount | number | The number of update coupons (`0` or `1` depending on whether the request was successful)
+message | string | Status message
+updateCount | number | The number of updated coupons (`1` or `0` depending on whether the update was successful)
 success | boolean | `true` if the coupon has been updated, `false` otherwise
 
 
@@ -562,28 +477,25 @@ success | boolean | `true` if the coupon has been updated, `false` otherwise
 > Error response example
 
 ```http
-HTTP/1.1 404 Not Found
+HTTP/1.1 409 Conflict
 Content-Type application/json; charset=utf-8
 ```
 
-In case of error, Ecwid responds with an error HTTP status code and JSON-formatted body containing error description.
+In case of error, Ecwid responds with an error HTTP status code and, optionally, a JSON-formatted body containing error description.
 
 #### HTTP codes
 
 **HTTP Status** | **Response JSON** | Description
 -------------- | -------------- | --------------
 400 | Request parameters are malformed
-404 | The coupon with given ID is not found
-409 | The coupon with the given email already exists
-500 | The update request failed because of an error on the server
+409 | The coupon with the given code already exists
+500 | The request failed because of an error on the server
 
 #### Error response body (optional)
 
 Field | Type |  Description
 --------- | ---------| -----------
 errorMessage | string | Error message
-
-
 
 
 
@@ -604,18 +516,18 @@ errorMessage | string | Error message
 > Request example
 
 ```http
-DELETE /api/v3/4870020/discount_coupons/39847403?token=123456789abcd HTTP/1.1
+DELETE /api/v3/4870020/discount_coupons/MOXQ3Y222CWXRXA?token=123456789abcd HTTP/1.1
 Host: app.ecwid.com
 Content-Type: application/json;charset=utf-8
 Cache-Control: no-cache
 ```
 
-`DELETE https://app.ecwid.com/api/v3/{storeId}/discount_coupons/{couponId}?token={token}`
+`DELETE https://app.ecwid.com/api/v3/{storeId}/discount_coupons/{couponCode}?token={token}`
 
 Name | Type    | Description
 ---- | ------- | -----------
 **storeId** |  number | Ecwid store ID
-**couponId** | number | Coupon ID
+**couponCode** | number | Coupon code
 **token** |  string |  oAuth token
 
 ### Response
@@ -624,8 +536,9 @@ Name | Type    | Description
 
 ```json
 {
-    "deleteCount": 1,
-    "success": true
+    message: "",
+    deleteCount: 1,
+    success: true
 }
 ```
 
@@ -635,6 +548,7 @@ A JSON object of type 'DeleteStatus' with the following fields:
 
 Field | Type |  Description
 ----- | ---- | ------------
+message | string | Status message
 deleteCount | number | The number of deleted coupons (`1` or `0` depending on whether the request was successful)
 success | boolean | `true` if the coupon has been deleted, `false` otherwise
 
@@ -655,8 +569,8 @@ In case of error, Ecwid responds with an error HTTP status code and JSON-formatt
 **HTTP Status** | **Response JSON** | Description
 -------------- | -------------- | --------------
 400 | Request parameters are malformed
-404 | The coupon with given ID is not found
-500 | The update request failed because of an error on the server
+404 | The coupon with given code is not found
+500 | The request failed because of an error on the server
 
 #### Error response body (optional)
 
