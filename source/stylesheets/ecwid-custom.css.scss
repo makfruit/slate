@@ -1,0 +1,64 @@
+/*
+ * Navigation
+ */
+div.tocify-wrapper img+.tocify {
+  margin-top: 5px;
+}
+
+div.tocify-wrapper ul, div.tocify-wrapper li {
+  line-height: 25px;
+}
+
+div.tocify-wrapper li:first {
+  margin-top: 0;
+}
+
+/*
+ * Headers
+ */
+div.content h1 {
+  background-image: none;
+  margin-top: 45px;
+  border-top: none;
+}
+
+
+// Add special styles for the section headers
+$section-headers: 
+  "using-ecwid-api", 
+  "api-reference",  
+  "embedded-apps",
+  "customize-storefront",
+  "single-sign-on",
+  "examples-and-libraries";
+
+@each $section-header in $section-headers {
+  // Mark super-headers in the navigation bar
+  div.tocify-wrapper li[data-unique="#{$section-header}"] {
+    line-height: 34px;
+    color: #b1b2b0;
+    padding-top: 15px;
+    text-transform: uppercase;
+  }
+
+  // Change design of selected state of the navigation item
+  div.tocify-wrapper li[data-unique="#{$section-header}"].tocify-focus {
+    background-color: inherit;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+
+  // Change the section header styles in the content block
+  div.content h1##{$section-header} {
+    background-image: none;
+    background-color: #eaf2f6;
+    border-bottom: 0;
+    font-size: 36px;
+    color: gray;
+  }
+
+  // Change the next header styles
+  div.content h1##{$section-header} + div + h1 {
+    margin-top: 0;
+  }
+}
