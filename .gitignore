@@ -24,3 +24,17 @@ doc/
 # Sources
 source/index.md
 source/index.md
+
+*.md
+
+source/index.md
+
+source/includes/_errors.md
+
+source/includes
+
+README.md
+
+source/includes
+
+source/images/logo.png
